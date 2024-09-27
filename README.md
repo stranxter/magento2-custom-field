@@ -1,4 +1,4 @@
-## Adding a custom field to the checkout process
+## Adding a custom field to the Magento 2 checkout process
 
 This module adds a custom text field to the Magento 2 checkout page. The field's value is stored in newly added columns in the `quote` and `sales_order` tables. The data is also shown on the Order details page in the Magento 2 admin interface. Verified with Magento 2.4.7.
 
