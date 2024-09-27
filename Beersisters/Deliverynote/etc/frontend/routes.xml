@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <router id="standard">
+        <route id="Beersisters_Deliverynote" frontName="module">
+            <module name="Beersisters_Deliverynote"/>
+        </route>
+    </router>
+</config>
