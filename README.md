@@ -16,7 +16,7 @@ Basic information about module creation
 
 ## Installation and tweaking:
 
-- copy the directory tree to your <Magento Dir>/add/code directory
+- copy the directory tree to your <Magento Dir>/app/code directory
 - run `setup:upgrade`
 - the vendor and module name (Beersisters/Deliverynote) does not apper anywhere on the user interface, but if you want to change them, make sure to replace all namespaces and module indentifiers
 - if you want to place the custom field at another location relative to the checkout steps and other checkout fields, you need to modify `checkout_index_index.xml`. However, this will require your own research as to how exactly to locate the right spot. The tutorials above provide some direction. Look at `LayoutProcessorPlugin.php` in Nga Dong's post and the [Magento Documentation](https://developer.adobe.com/commerce/php/tutorials/frontend/custom-checkout/)
