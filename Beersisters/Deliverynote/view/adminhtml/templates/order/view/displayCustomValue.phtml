@@ -1,3 +1,10 @@
-<pre>Custom Note Added: 
-<?php $NoteValue = $block->getDelivery_note(); echo $NoteValue; ?>
-</pre>
+<?php
+/**
+ * @var \Beersisters\Deliverynote\Block\Adminhtml\Order\View\DisplayCustomValue $block
+ */
+$deliveryNote = $block->getDeliveryNote();
+?>
+<?php if ($deliveryNote !== '') : ?>
+<pre><?= $block->escapeHtml(__('Custom Note Added:')) ?>
+<?= $block->escapeHtml($deliveryNote) ?></pre>
+<?php endif; ?>

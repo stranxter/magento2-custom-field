@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!--
+    Declares the delivery_note column on the three tables that Setup/InstallSchema.php
+    created with addColumn(type => text, nullable => true).
+
+    These columns ALREADY EXIST in production and hold real order notes. This file must
+    therefore describe them exactly as they are, so that setup:upgrade recognises them and
+    makes no change. `xsi:type="text"` maps to MySQL TEXT, which is what the legacy
+    addColumn produced (Table::DEFAULT_TEXT_SIZE = 1024 => `text`).
+
+    Verify with the `setup:upgrade` dry-run gate in UPGRADE-PLAN-2.4.9.md §4.2 before
+    deleting Setup/InstallSchema.php.
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="quote" resource="checkout" engine="innodb">
+        <column xsi:type="text" name="delivery_note" nullable="true" comment="Delivery Note"/>
+    </table>
+    <table name="sales_order" resource="sales" engine="innodb">
+        <column xsi:type="text" name="delivery_note" nullable="true" comment="Delivery Note"/>
+    </table>
+    <table name="sales_order_grid" resource="sales" engine="innodb">
+        <column xsi:type="text" name="delivery_note" nullable="true" comment="Delivery Note"/>
+    </table>
+</schema>

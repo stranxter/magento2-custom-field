@@ -1,0 +1,17 @@
+{
+    "quote": {
+        "column": {
+            "delivery_note": true
+        }
+    },
+    "sales_order": {
+        "column": {
+            "delivery_note": true
+        }
+    },
+    "sales_order_grid": {
+        "column": {
+            "delivery_note": true
+        }
+    }
+}
