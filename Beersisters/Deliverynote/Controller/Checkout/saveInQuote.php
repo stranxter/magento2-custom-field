@@ -83,10 +83,15 @@ class saveInQuote implements HttpPostActionInterface, CsrfAwareActionInterface
     /**
      * Real form-key validation.
      *
+     * The method MUST be named validateForCsrf - that is what
+     * Magento\Framework\App\CsrfAwareActionInterface declares. There is no
+     * validateForRequest anywhere in the framework; naming it that way makes the class
+     * abstract-by-omission and PHP fatals at compile time.
+     *
      * Note for future maintainers: do NOT "simplify" this to `return true;`. That is the
      * common copy-paste that silently disables CSRF protection on the endpoint.
      */
-    public function validateForRequest(RequestInterface $request): ?bool
+    public function validateForCsrf(RequestInterface $request): ?bool
     {
         return $this->formKeyValidator->validate($request);
     }
