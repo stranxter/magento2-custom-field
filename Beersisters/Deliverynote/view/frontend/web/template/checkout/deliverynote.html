@@ -1,2 +1,12 @@
-<div>Коментар към поръчката</div>
-<textarea name="deliverynote" value="" data-bind='value: NoteVals'/>
+<div class="field beersisters-deliverynote">
+    <label class="label" for="beersisters-deliverynote">
+        <span>Коментар към поръчката</span>
+    </label>
+    <div class="control">
+        <textarea id="beersisters-deliverynote"
+                  name="deliverynote"
+                  class="input-text"
+                  rows="3"
+                  data-bind="value: NoteVals, attr: {maxlength: maxNoteLength}"></textarea>
+    </div>
+</div>
