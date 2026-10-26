@@ -1,7 +1,7 @@
 define([], function () {
     'use strict';
 
-    /** Same component, our template: Magento's plus a "Данни за фактура" heading. */
+    /** Same component, our template: billing = delivery address, form only for virtual-only carts. */
     return function (BillingAddress) {
         return BillingAddress.extend({
             defaults: {

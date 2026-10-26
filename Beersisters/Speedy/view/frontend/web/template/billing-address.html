@@ -1,17 +1,12 @@
 <!--
-    Magento_Checkout::billing-address.html (2.4.9) plus a "Данни за фактура" heading and a clearer checkbox label:
-    the billing address is what the invoice carries. "Same as the delivery address" is the default in both modes
-    (user decision 2026-10-26); the shopper unticks it to enter other invoice details.
+    Magento_Checkout::billing-address.html (2.4.9), shown ONLY when the delivery address can't be used for billing,
+    i.e. a cart of virtual products only (no delivery address). Otherwise nothing is shown: the billing address is
+    always the delivery address (user decision 2026-10-26; Magento's checkout-data-resolver copies it).
     Selected by js/mixin/billing-address-mixin.js. Re-check against the core template on Magento upgrades.
 -->
+<!-- ko ifnot: canUseShippingAddress() -->
 <div class="checkout-billing-address">
     <div class="bsspeedy-billing-title"><span data-bind="i18n: 'Invoice details'"></span></div>
-    <div class="billing-address-same-as-shipping-block field choice" data-bind="visible: canUseShippingAddress()">
-        <input type="checkbox" name="billing-address-same-as-shipping"
-               data-bind="checked: isAddressSameAsShipping, click: useShippingAddress, attr: {id: 'billing-address-same-as-shipping-' + getCode($parent)}"/>
-        <label data-bind="attr: {for: 'billing-address-same-as-shipping-' + getCode($parent)}"><span
-                data-bind="i18n: 'Same as the delivery address'"></span></label>
-    </div>
     <render args="detailsTemplate"></render>
     <fieldset class="fieldset" data-bind="visible: !isAddressDetailsVisible()">
         <each args="getRegion('billing-address-list')" render=""></each>
@@ -21,3 +16,4 @@
         <render args="actionsTemplate"></render>
     </fieldset>
 </div>
+<!-- /ko -->
