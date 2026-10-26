@@ -11,9 +11,6 @@ var config = {
             'Magento_Checkout/js/model/shipping-save-processor/payload-extender': {
                 'Beersisters_Speedy/js/mixin/payload-extender-mixin': true
             },
-            'Magento_Checkout/js/model/new-customer-address': {
-                'Beersisters_Speedy/js/mixin/new-customer-address-mixin': true
-            },
             'Magento_Checkout/js/view/billing-address': {
                 'Beersisters_Speedy/js/mixin/billing-address-mixin': true
             }

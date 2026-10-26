@@ -35,5 +35,5 @@
 "The address contains characters that are not allowed (curly braces).","Адресът съдържа непозволени символи (фигурни скоби)."
 "Please go back to the shipping step and choose your Speedy delivery again.","Моля, върнете се към стъпката за доставка и изберете отново доставка със Спиди."
 "The selected Speedy office is no longer available. Please choose another one.","Избраният офис на Спиди вече не работи. Моля, изберете друг."
-"Please enter your own billing address. It is needed for the invoice.","Моля, въведете Вашия адрес за фактуриране. Той е необходим за фактурата."
 "Invoice details","Данни за фактура"
+"Same as the delivery address","Същите като адрес за доставка"

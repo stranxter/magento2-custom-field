@@ -61,10 +61,9 @@ class AddressApplier
             $address->setStreet($this->officeStreet($office));
             $address->setPostcode($this->officePostcode($office, $site));
             $address->setCompany(null);
-            // An office is not the customer's address: never put it in their address book or reuse it for billing.
+            // An office is not the customer's address: never put it in their address book.
             $address->setCustomerAddressId(null);
             $address->setSaveInAddressBook(0);
-            $address->setSameAsBilling(0);
         } else {
             $site = $siteId > 0
                 ? $this->lookup->getSite($siteId)

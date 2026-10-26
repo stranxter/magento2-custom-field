@@ -1,6 +1,7 @@
 <!--
-    Magento_Checkout::billing-address.html (2.4.9) plus a heading: the billing address is what the invoice
-    carries (НАП), and in office mode it can't be the shipping address, so the shopper must see what it is for.
+    Magento_Checkout::billing-address.html (2.4.9) plus a "Данни за фактура" heading and a clearer checkbox label:
+    the billing address is what the invoice carries. "Same as the delivery address" is the default in both modes
+    (user decision 2026-10-26); the shopper unticks it to enter other invoice details.
     Selected by js/mixin/billing-address-mixin.js. Re-check against the core template on Magento upgrades.
 -->
 <div class="checkout-billing-address">
@@ -9,7 +10,7 @@
         <input type="checkbox" name="billing-address-same-as-shipping"
                data-bind="checked: isAddressSameAsShipping, click: useShippingAddress, attr: {id: 'billing-address-same-as-shipping-' + getCode($parent)}"/>
         <label data-bind="attr: {for: 'billing-address-same-as-shipping-' + getCode($parent)}"><span
-                data-bind="i18n: 'My billing and shipping address are the same'"></span></label>
+                data-bind="i18n: 'Same as the delivery address'"></span></label>
     </div>
     <render args="detailsTemplate"></render>
     <fieldset class="fieldset" data-bind="visible: !isAddressDetailsVisible()">

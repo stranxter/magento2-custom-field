@@ -19,8 +19,8 @@ use Magento\Quote\Model\Quote\Address;
  * took (storefront, REST, GraphQL), so it trusts nothing stored earlier:
  *  - every order: no template braces in either address (09-24 incident class);
  *  - Speedy orders from the storefront: the stored address still matches the stored office/site exactly (another
- *    checkout path could have changed the street after Plugin\ShippingInformation ran), and an office order has the
- *    customer's own billing address (needed for the invoice, НАП).
+ *    checkout path could have changed the street after Plugin\ShippingInformation ran).
+ * The billing address is free (default: same as the delivery address, also for offices; user decision 2026-10-26).
  * Orders entered by staff in the admin skip the Speedy checks: there is no admin UI to pick a site or office.
  */
 class ValidateOrder implements ObserverInterface
@@ -97,20 +97,6 @@ class ValidateOrder implements ObserverInterface
             || (string)$shipping->getPostcode() !== $this->addressApplier->officePostcode($office, $site)
         ) {
             throw $this->chooseAgain();
-        }
-        $this->checkBilling($quote->getBillingAddress(), $shipping);
-    }
-
-    /**
-     * @throws LocalizedException
-     */
-    private function checkBilling(Address $billing, Address $shipping): void
-    {
-        $street = trim(implode(' ', $this->lines($billing)));
-        if (mb_strlen($street) < 5 || $this->lines($billing) === $this->lines($shipping)
-            || trim((string)$billing->getCity()) === '' || trim((string)$billing->getPostcode()) === ''
-        ) {
-            throw new LocalizedException(__('Please enter your own billing address. It is needed for the invoice.'));
         }
     }
 
