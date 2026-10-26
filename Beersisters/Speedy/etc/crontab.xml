@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="default">
+        <!-- After box-backup (03:01, ~1 min downtime). -->
+        <job name="beersisters_speedy_sync" instance="Beersisters\Speedy\Cron\Sync" method="execute">
+            <schedule>15 4 * * *</schedule>
+        </job>
+    </group>
+</config>

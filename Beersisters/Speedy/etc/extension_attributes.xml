@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Api/etc/extension_attributes.xsd">
+    <!-- Sent by the checkout with the shipping address; checked and stored by Plugin\ShippingInformation. -->
+    <extension_attributes for="Magento\Quote\Api\Data\AddressInterface">
+        <attribute code="speedy_method" type="string"/>
+        <attribute code="speedy_site_id" type="int"/>
+        <attribute code="speedy_office_id" type="int"/>
+    </extension_attributes>
+</config>

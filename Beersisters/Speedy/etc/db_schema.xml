@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<!--
+    Local copy of Speedy's location data (refreshed daily by Model\Sync) and the customer's Speedy choice on the
+    quote/order address. The checkout reads only these tables; it never calls Speedy.
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="beersisters_speedy_site" resource="default" engine="innodb" comment="Speedy sites (cities/villages), daily copy">
+        <column xsi:type="int" name="site_id" unsigned="true" nullable="false" identity="false" comment="Speedy site id"/>
+        <column xsi:type="int" name="main_site_id" unsigned="true" nullable="true" comment="Main site of a satellite"/>
+        <column xsi:type="varchar" name="type" length="20" nullable="false" default="" comment="гр., с., ..."/>
+        <column xsi:type="varchar" name="name" length="80" nullable="false" comment="Name (BG)"/>
+        <column xsi:type="varchar" name="name_en" length="80" nullable="false" default="" comment="Name (Latin)"/>
+        <column xsi:type="varchar" name="municipality" length="80" nullable="false" default=""/>
+        <column xsi:type="varchar" name="region" length="80" nullable="false" default=""/>
+        <column xsi:type="varchar" name="post_code" length="10" nullable="false" default=""/>
+        <column xsi:type="smallint" name="address_nomenclature" unsigned="true" nullable="false" default="0" comment="0 none, 1 partial, 2 full"/>
+        <column xsi:type="decimal" name="x" precision="10" scale="6" nullable="true" comment="Longitude"/>
+        <column xsi:type="decimal" name="y" precision="10" scale="6" nullable="true" comment="Latitude"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="site_id"/>
+        </constraint>
+        <index referenceId="BEERSISTERS_SPEEDY_SITE_NAME" indexType="btree">
+            <column name="name"/>
+        </index>
+        <index referenceId="BEERSISTERS_SPEEDY_SITE_NAME_EN" indexType="btree">
+            <column name="name_en"/>
+        </index>
+    </table>
+    <table name="beersisters_speedy_office" resource="default" engine="innodb" comment="Speedy offices and automats, daily copy">
+        <column xsi:type="int" name="office_id" unsigned="true" nullable="false" identity="false" comment="Speedy office id"/>
+        <column xsi:type="int" name="site_id" unsigned="true" nullable="false"/>
+        <column xsi:type="varchar" name="type" length="10" nullable="false" comment="OFFICE or APT"/>
+        <column xsi:type="varchar" name="name" length="100" nullable="false"/>
+        <column xsi:type="varchar" name="name_en" length="100" nullable="false" default=""/>
+        <column xsi:type="varchar" name="address" length="255" nullable="false" default="" comment="fullAddressString"/>
+        <column xsi:type="varchar" name="local_address" length="255" nullable="false" default="" comment="localAddressString"/>
+        <column xsi:type="varchar" name="post_code" length="10" nullable="false" default=""/>
+        <column xsi:type="varchar" name="hours_full" length="11" nullable="false" default="" comment="HH:mm-HH:mm, working days"/>
+        <column xsi:type="varchar" name="hours_half" length="11" nullable="false" default="" comment="HH:mm-HH:mm, Saturday schedule"/>
+        <column xsi:type="varchar" name="hours_dayoff" length="11" nullable="false" default="" comment="HH:mm-HH:mm, days off"/>
+        <column xsi:type="decimal" name="max_parcel_weight" precision="8" scale="2" nullable="true"/>
+        <column xsi:type="boolean" name="cash_payment" nullable="false" default="false"/>
+        <column xsi:type="boolean" name="card_payment" nullable="false" default="false"/>
+        <column xsi:type="decimal" name="x" precision="10" scale="6" nullable="true"/>
+        <column xsi:type="decimal" name="y" precision="10" scale="6" nullable="true"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="office_id"/>
+        </constraint>
+        <index referenceId="BEERSISTERS_SPEEDY_OFFICE_SITE_ID" indexType="btree">
+            <column name="site_id"/>
+        </index>
+    </table>
+    <table name="beersisters_speedy_sync" resource="default" engine="innodb" comment="Speedy sync runs">
+        <column xsi:type="int" name="sync_id" unsigned="true" nullable="false" identity="true"/>
+        <column xsi:type="timestamp" name="started_at" nullable="false" default="CURRENT_TIMESTAMP"/>
+        <column xsi:type="timestamp" name="finished_at" nullable="true"/>
+        <column xsi:type="varchar" name="status" length="16" nullable="false" comment="running, success, error, dry-run"/>
+        <column xsi:type="int" name="site_count" unsigned="true" nullable="false" default="0"/>
+        <column xsi:type="int" name="office_count" unsigned="true" nullable="false" default="0"/>
+        <column xsi:type="varchar" name="message" length="1024" nullable="false" default=""/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="sync_id"/>
+        </constraint>
+    </table>
+    <table name="quote_address" resource="checkout" engine="innodb">
+        <column xsi:type="varchar" name="speedy_method" length="16" nullable="true" comment="Speedy: office or address"/>
+        <column xsi:type="int" name="speedy_site_id" unsigned="true" nullable="true" comment="Speedy site id"/>
+        <column xsi:type="int" name="speedy_office_id" unsigned="true" nullable="true" comment="Speedy office id"/>
+    </table>
+    <table name="sales_order_address" resource="sales" engine="innodb">
+        <column xsi:type="varchar" name="speedy_method" length="16" nullable="true" comment="Speedy: office or address"/>
+        <column xsi:type="int" name="speedy_site_id" unsigned="true" nullable="true" comment="Speedy site id"/>
+        <column xsi:type="int" name="speedy_office_id" unsigned="true" nullable="true" comment="Speedy office id"/>
+    </table>
+</schema>

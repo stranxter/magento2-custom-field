@@ -1,0 +1,78 @@
+{
+    "beersisters_speedy_site": {
+        "column": {
+            "site_id": true,
+            "main_site_id": true,
+            "type": true,
+            "name": true,
+            "name_en": true,
+            "municipality": true,
+            "region": true,
+            "post_code": true,
+            "address_nomenclature": true,
+            "x": true,
+            "y": true
+        },
+        "index": {
+            "BEERSISTERS_SPEEDY_SITE_NAME": true,
+            "BEERSISTERS_SPEEDY_SITE_NAME_EN": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "beersisters_speedy_office": {
+        "column": {
+            "office_id": true,
+            "site_id": true,
+            "type": true,
+            "name": true,
+            "name_en": true,
+            "address": true,
+            "local_address": true,
+            "post_code": true,
+            "hours_full": true,
+            "hours_half": true,
+            "hours_dayoff": true,
+            "max_parcel_weight": true,
+            "cash_payment": true,
+            "card_payment": true,
+            "x": true,
+            "y": true
+        },
+        "index": {
+            "BEERSISTERS_SPEEDY_OFFICE_SITE_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "beersisters_speedy_sync": {
+        "column": {
+            "sync_id": true,
+            "started_at": true,
+            "finished_at": true,
+            "status": true,
+            "site_count": true,
+            "office_count": true,
+            "message": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "quote_address": {
+        "column": {
+            "speedy_method": true,
+            "speedy_site_id": true,
+            "speedy_office_id": true
+        }
+    },
+    "sales_order_address": {
+        "column": {
+            "speedy_method": true,
+            "speedy_site_id": true,
+            "speedy_office_id": true
+        }
+    }
+}

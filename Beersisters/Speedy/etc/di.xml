@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- Keep the API password out of app:config:dump / config.php. -->
+    <type name="Magento\Config\Model\Config\TypePool">
+        <arguments>
+            <argument name="sensitive" xsi:type="array">
+                <item name="carriers/bsspeedy/api_password" xsi:type="string">1</item>
+                <item name="carriers/bsspeedy/api_username" xsi:type="string">1</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Checkout\Model\ShippingInformationManagement">
+        <plugin name="beersisters_speedy_shipping_information" type="Beersisters\Speedy\Plugin\ShippingInformation"/>
+    </type>
+
+    <type name="Magento\Quote\Model\Quote\Address\ToOrderAddress">
+        <plugin name="beersisters_speedy_copy_to_order_address" type="Beersisters\Speedy\Plugin\CopyToOrderAddress"/>
+    </type>
+
+    <type name="Magento\Framework\Console\CommandListInterface">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="beersisters_speedy_sync" xsi:type="object">Beersisters\Speedy\Console\Command\SyncCommand</item>
+                <item name="beersisters_speedy_credentials" xsi:type="object">Beersisters\Speedy\Console\Command\CredentialsCommand</item>
+            </argument>
+        </arguments>
+    </type>
+    <!-- Proxies: every bin/magento call instantiates all commands; don't build the sync/API stack each time. -->
+    <type name="Beersisters\Speedy\Console\Command\SyncCommand">
+        <arguments>
+            <argument name="sync" xsi:type="object">Beersisters\Speedy\Model\Sync\Proxy</argument>
+        </arguments>
+    </type>
+    <type name="Beersisters\Speedy\Console\Command\CredentialsCommand">
+        <arguments>
+            <argument name="client" xsi:type="object">Beersisters\Speedy\Model\Api\Client\Proxy</argument>
+            <argument name="configWriter" xsi:type="object">Magento\Framework\App\Config\Storage\WriterInterface\Proxy</argument>
+        </arguments>
+    </type>
+</config>

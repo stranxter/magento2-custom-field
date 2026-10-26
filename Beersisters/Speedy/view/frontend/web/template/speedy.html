@@ -1,0 +1,102 @@
+<!-- Speedy delivery choice. Everything from Speedy or the customer is rendered with `text` bindings only. -->
+<div id="bsspeedy" class="bsspeedy" data-bind="visible: isAvailable">
+    <fieldset class="fieldset bsspeedy-mode">
+        <legend class="legend"><span data-bind="i18n: 'Delivery with Speedy'"></span></legend>
+        <div class="bsspeedy-mode-options" role="radiogroup">
+            <!-- ko foreach: modes -->
+            <label class="bsspeedy-mode-option" data-bind="css: {_selected: $parent.mode() === code}">
+                <input type="radio" name="bsspeedy_mode" data-bind="checkedValue: code, checked: $parent.modeChoice"/>
+                <span class="bsspeedy-mode-title" data-bind="text: title"></span>
+                <span class="bsspeedy-mode-price" data-bind="text: $parent.priceFor(code)"></span>
+            </label>
+            <!-- /ko -->
+        </div>
+        <div class="field-error" role="alert" data-bind="visible: modeError, text: modeError"></div>
+    </fieldset>
+
+    <!-- ko if: mode -->
+    <div class="field required bsspeedy-site">
+        <label class="label" for="bsspeedy-site"><span data-bind="i18n: 'Town or village'"></span></label>
+        <div class="control">
+            <input id="bsspeedy-site" type="text" class="input-text" autocomplete="off" maxlength="50"
+                   data-bind="textInput: siteTerm,
+                              event: {keydown: onSiteKeydown, blur: onSiteBlur},
+                              attr: {placeholder: $t('Start typing, e.g. Пловдив')}"/>
+            <span class="bsspeedy-loading" data-bind="visible: siteLoading"></span>
+            <ul class="bsspeedy-suggestions" role="listbox" data-bind="visible: siteSuggestions().length, foreach: siteSuggestions">
+                <li role="option" data-bind="css: {_active: $index() === $parent.siteCursor()},
+                                             event: {mousedown: $parent.chooseSite.bind($parent, $data)}">
+                    <span class="bsspeedy-site-name" data-bind="text: $parent.siteLabel($data)"></span>
+                    <span class="bsspeedy-site-meta" data-bind="text: $parent.siteMeta($data)"></span>
+                </li>
+            </ul>
+            <div class="field-error" role="alert" data-bind="visible: siteError, text: siteError"></div>
+        </div>
+    </div>
+    <!-- /ko -->
+
+    <!-- ko if: mode() === 'office' -->
+    <div class="bsspeedy-recipient" data-bind="if: recipient">
+        <span data-bind="i18n: 'Recipient:'"></span>
+        <strong data-bind="text: recipient().name"></strong>,
+        <span data-bind="text: recipient().telephone"></span>
+    </div>
+
+    <!-- ko if: site -->
+    <div class="field required bsspeedy-offices">
+        <label class="label" for="bsspeedy-office-filter"><span data-bind="i18n: 'Office or automat'"></span></label>
+        <div class="control">
+            <!-- ko if: officesLoading -->
+            <div class="bsspeedy-note" data-bind="i18n: 'Loading offices…'"></div>
+            <!-- /ko -->
+            <!-- ko ifnot: officesLoading -->
+            <!-- ko if: offices().length -->
+            <input id="bsspeedy-office-filter" type="search" class="input-text" autocomplete="off" maxlength="50"
+                   data-bind="textInput: officeFilter, attr: {placeholder: $t('Search by name or address')}"/>
+            <div class="bsspeedy-note">
+                <span data-bind="text: filteredOffices().length"></span>
+                <span data-bind="i18n: 'of'"></span>
+                <span data-bind="text: offices().length"></span>
+            </div>
+            <ul class="bsspeedy-office-list" role="radiogroup" data-bind="foreach: filteredOffices">
+                <li class="bsspeedy-office" data-bind="css: {_selected: $parent.selectedOfficeId() === id}">
+                    <label>
+                        <input type="radio" name="bsspeedy_office" data-bind="checkedValue: id, checked: $parent.selectedOfficeId"/>
+                        <span class="bsspeedy-office-body">
+                            <span class="bsspeedy-office-name" data-bind="text: name"></span>
+                            <span class="bsspeedy-badge" data-bind="css: {_apt: type === 'APT'},
+                                                                   text: type === 'APT' ? $t('Automat') : $t('Office')"></span>
+                            <!-- ko if: type === 'APT' -->
+                            <span class="bsspeedy-badge _card" data-bind="i18n: 'Card payment only'"></span>
+                            <!-- /ko -->
+                            <span class="bsspeedy-office-address" data-bind="text: local_address || address"></span>
+                            <span class="bsspeedy-office-hours" data-bind="text: $parent.hoursText($data)"></span>
+                        </span>
+                    </label>
+                </li>
+            </ul>
+            <!-- ko ifnot: filteredOffices().length -->
+            <div class="bsspeedy-note" data-bind="i18n: 'Nothing matches your search.'"></div>
+            <!-- /ko -->
+            <!-- /ko -->
+            <!-- ko ifnot: offices().length -->
+            <div class="bsspeedy-note" data-bind="i18n: 'There is no Speedy office or automat here. Please choose another place.'"></div>
+            <!-- /ko -->
+            <!-- /ko -->
+            <div class="field-error" role="alert" data-bind="visible: officeError, text: officeError"></div>
+        </div>
+    </div>
+
+    <!-- ko if: isAutomat -->
+    <div class="message notice bsspeedy-automat-notice">
+        <span data-bind="i18n: 'At an automat, cash on delivery is paid by card only.'"></span>
+    </div>
+    <!-- /ko -->
+    <!-- /ko -->
+
+    <div class="bsspeedy-note bsspeedy-selected" data-bind="visible: office">
+        <span data-bind="i18n: 'Selected:'"></span>
+        <strong data-bind="text: office() ? office().name : ''"></strong>
+    </div>
+    <!-- /ko -->
+</div>

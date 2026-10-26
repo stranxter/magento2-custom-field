@@ -1,0 +1,173 @@
+// Speedy delivery choice (Beersisters_Speedy). Luma variables only, so it follows the theme.
+
+& when (@media-common = true) {
+    .bsspeedy {
+        margin: 0 0 @indent__l;
+
+        .bsspeedy-mode .legend {
+            margin-bottom: @indent__s;
+        }
+
+        .bsspeedy-mode-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: @indent__s;
+        }
+
+        .bsspeedy-mode-option {
+            align-items: center;
+            border: 1px solid @border-color__base;
+            border-radius: 3px;
+            cursor: pointer;
+            display: flex;
+            flex: 1 1 240px;
+            gap: @indent__s;
+            padding: @indent__s @indent__base;
+
+            &._selected {
+                border-color: @active__color;
+                box-shadow: 0 0 0 1px @active__color;
+            }
+        }
+
+        .bsspeedy-mode-title {
+            flex: 1;
+        }
+
+        .bsspeedy-mode-price {
+            font-weight: @font-weight__bold;
+            white-space: nowrap;
+        }
+
+        .bsspeedy-site .control {
+            position: relative;
+        }
+
+        .bsspeedy-suggestions {
+            background: @color-white;
+            border: 1px solid @border-color__base;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, .15);
+            left: 0;
+            list-style: none;
+            margin: 0;
+            max-height: 320px;
+            overflow-y: auto;
+            padding: 0;
+            position: absolute;
+            right: 0;
+            top: 100%;
+            z-index: 100;
+
+            li {
+                cursor: pointer;
+                margin: 0;
+                padding: 6px @indent__s;
+
+                &._active,
+                &:hover {
+                    background: @color-gray94;
+                }
+            }
+        }
+
+        .bsspeedy-site-name {
+            display: block;
+        }
+
+        .bsspeedy-site-meta,
+        .bsspeedy-note,
+        .bsspeedy-office-hours {
+            color: @color-gray40;
+            font-size: @font-size__s;
+        }
+
+        .bsspeedy-office-list {
+            border: 1px solid @border-color__base;
+            list-style: none;
+            margin: @indent__xs 0 0;
+            max-height: 360px;
+            overflow-y: auto;
+            padding: 0;
+        }
+
+        .bsspeedy-office {
+            border-bottom: 1px solid @color-gray90;
+            margin: 0;
+
+            &:last-child {
+                border-bottom: 0;
+            }
+
+            label {
+                align-items: flex-start;
+                cursor: pointer;
+                display: flex;
+                gap: @indent__s;
+                padding: @indent__s;
+            }
+
+            &._selected {
+                background: @color-gray94;
+            }
+        }
+
+        .bsspeedy-office-body {
+            display: block;
+        }
+
+        .bsspeedy-office-name {
+            font-weight: @font-weight__semibold;
+            margin-right: @indent__xs;
+        }
+
+        .bsspeedy-office-address,
+        .bsspeedy-office-hours {
+            display: block;
+        }
+
+        .bsspeedy-badge {
+            border: 1px solid @border-color__base;
+            border-radius: 3px;
+            display: inline-block;
+            font-size: @font-size__s;
+            line-height: 1.4;
+            margin-right: @indent__xs;
+            padding: 0 5px;
+
+            &._apt {
+                border-color: @active__color;
+            }
+
+            &._card {
+                background: @color-yellow-light2;
+            }
+        }
+
+        .bsspeedy-recipient,
+        .bsspeedy-automat-notice {
+            margin: @indent__s 0;
+        }
+
+        .field-error {
+            margin-top: @indent__xs;
+        }
+    }
+
+    // The switch replaces the shipping-method table; the "Next" button below it stays.
+    .bsspeedy-active #checkout-shipping-method-load {
+        display: none;
+    }
+
+    .bsspeedy-mode-office {
+        // The street group's label stays when its lines are hidden (speedy.js setVisible).
+        #shipping-new-address-form .field.street {
+            display: none;
+        }
+
+        // Saved addresses (not used by this store, which has no customer accounts) are not delivery targets.
+        .checkout-shipping-address .shipping-address-items,
+        .checkout-shipping-address .new-address-popup {
+            display: none;
+        }
+    }
+}

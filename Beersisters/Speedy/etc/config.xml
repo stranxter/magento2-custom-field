@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <carriers>
+            <bsspeedy>
+                <active>0</active>
+                <model>Beersisters\Speedy\Model\Carrier</model>
+                <title>Спиди</title>
+                <name_office>Доставка до офис или автомат на Спиди</name_office>
+                <name_address>Доставка до адрес</name_address>
+                <price_office>3</price_office>
+                <price_address>4</price_address>
+                <sallowspecific>1</sallowspecific>
+                <specificcountry>BG</specificcountry>
+                <showmethod>0</showmethod>
+                <sort_order>10</sort_order>
+                <api_username/>
+                <api_password backend_model="Magento\Config\Model\Config\Backend\Encrypted"/>
+                <sync_enabled>1</sync_enabled>
+            </bsspeedy>
+        </carriers>
+    </default>
+</config>
