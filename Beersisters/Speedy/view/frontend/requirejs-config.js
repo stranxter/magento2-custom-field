@@ -13,6 +13,9 @@ var config = {
             },
             'Magento_Checkout/js/model/new-customer-address': {
                 'Beersisters_Speedy/js/mixin/new-customer-address-mixin': true
+            },
+            'Magento_Checkout/js/view/billing-address': {
+                'Beersisters_Speedy/js/mixin/billing-address-mixin': true
             }
         }
     }

@@ -49,6 +49,25 @@
             <!-- ko if: officesLoading -->
             <div class="bsspeedy-note" data-bind="i18n: 'Loading offices…'"></div>
             <!-- /ko -->
+            <!-- ko if: office() && !showOfficeList() -->
+            <div class="bsspeedy-office-selected" data-bind="with: office">
+                <span class="bsspeedy-office-body">
+                    <span class="bsspeedy-office-name" data-bind="text: name"></span>
+                    <span class="bsspeedy-badge" data-bind="css: {_apt: type === 'APT'},
+                                                           text: type === 'APT' ? $t('Automat') : $t('Office')"></span>
+                    <!-- ko if: type === 'APT' -->
+                    <span class="bsspeedy-badge _card" data-bind="i18n: 'Card payment only'"></span>
+                    <!-- /ko -->
+                    <span class="bsspeedy-office-address" data-bind="text: local_address || address"></span>
+                    <span class="bsspeedy-office-hours" data-bind="text: $parent.hoursText($data)"></span>
+                </span>
+                <button type="button" class="action secondary bsspeedy-change"
+                        data-bind="click: $parent.changeOffice.bind($parent)">
+                    <span data-bind="i18n: 'Change'"></span>
+                </button>
+            </div>
+            <!-- /ko -->
+            <!-- ko if: showOfficeList -->
             <!-- ko ifnot: officesLoading -->
             <!-- ko if: offices().length -->
             <input id="bsspeedy-office-filter" type="search" class="input-text" autocomplete="off" maxlength="50"
@@ -83,6 +102,7 @@
             <div class="bsspeedy-note" data-bind="i18n: 'There is no Speedy office or automat here. Please choose another place.'"></div>
             <!-- /ko -->
             <!-- /ko -->
+            <!-- /ko -->
             <div class="field-error" role="alert" data-bind="visible: officeError, text: officeError"></div>
         </div>
     </div>
@@ -94,9 +114,5 @@
     <!-- /ko -->
     <!-- /ko -->
 
-    <div class="bsspeedy-note bsspeedy-selected" data-bind="visible: office">
-        <span data-bind="i18n: 'Selected:'"></span>
-        <strong data-bind="text: office() ? office().name : ''"></strong>
-    </div>
     <!-- /ko -->
 </div>

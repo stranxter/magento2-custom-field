@@ -115,6 +115,24 @@
             display: block;
         }
 
+        .bsspeedy-office-selected {
+            align-items: flex-start;
+            border: 1px solid @active__color;
+            border-radius: 3px;
+            display: flex;
+            gap: @indent__base;
+            justify-content: space-between;
+            padding: @indent__s @indent__base;
+
+            .bsspeedy-office-body {
+                flex: 1;
+            }
+
+            .bsspeedy-change {
+                flex: none;
+            }
+        }
+
         .bsspeedy-office-name {
             font-weight: @font-weight__semibold;
             margin-right: @indent__xs;
@@ -151,6 +169,12 @@
         .field-error {
             margin-top: @indent__xs;
         }
+    }
+
+    .checkout-billing-address .bsspeedy-billing-title {
+        font-size: @font-size__l;
+        font-weight: @font-weight__semibold;
+        margin: @indent__s 0 @indent__base;
     }
 
     // The switch replaces the shipping-method table; the "Next" button below it stays.

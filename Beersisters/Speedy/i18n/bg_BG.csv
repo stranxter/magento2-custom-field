@@ -19,7 +19,7 @@
 "Nothing matches your search.","Няма съвпадения."
 "There is no Speedy office or automat here. Please choose another place.","Тук няма офис или автомат на Спиди. Моля, изберете друго населено място."
 "At an automat, cash on delivery is paid by card only.","В автомата наложеният платеж се плаща само с карта."
-"Selected:","Избран:"
+"Change","Промени"
 "closed","почивен ден"
 "24 h","денонощно"
 "Open 24/7","Денонощно, всеки ден"
@@ -36,3 +36,4 @@
 "Please go back to the shipping step and choose your Speedy delivery again.","Моля, върнете се към стъпката за доставка и изберете отново доставка със Спиди."
 "The selected Speedy office is no longer available. Please choose another one.","Избраният офис на Спиди вече не работи. Моля, изберете друг."
 "Please enter your own billing address. It is needed for the invoice.","Моля, въведете Вашия адрес за фактуриране. Той е необходим за фактурата."
+"Invoice details","Данни за фактура"

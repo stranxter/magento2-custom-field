@@ -103,6 +103,12 @@ define([
             this.isAutomat = ko.pureComputed(function () {
                 return !!state.office() && state.office().type === 'APT';
             });
+            // Once an office is chosen the list collapses into a summary with a "Change" button, so the choice
+            // is visibly made (an open list with an empty search box looked frozen).
+            this.officeListOpen = ko.observable(false);
+            this.showOfficeList = ko.pureComputed(function () {
+                return !state.office() || self.officeListOpen();
+            });
 
             this.siteTerm.subscribe(_.debounce(this.searchSites.bind(this), 250));
             this.isAvailable.subscribe(this.refresh, this);
@@ -342,8 +348,21 @@ define([
         chooseOffice: function (office) {
             state.office(office);
             this.officeError('');
+            this.officeListOpen(false);
+            this.officeFilter('');
             this.fillFromChoice();
             this.save();
+        },
+
+        changeOffice: function () {
+            this.officeListOpen(true);
+            _.defer(function () {
+                var filter = document.getElementById('bsspeedy-office-filter');
+
+                if (filter) {
+                    filter.focus();
+                }
+            });
         },
 
         hoursText: function (office) {
