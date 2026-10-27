@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="footer">
+            <referenceBlock name="footer_links" remove="true" />
+            <block class="Magento\Framework\View\Element\Template" name="footer.navigation.menu" before="-" template="Magento_Theme::footer_menu.phtml"/>
+        </referenceContainer>
+
+        <!--referenceBlock name="header.container" remove="true" />
+        <referenceContainer name="page.wrapper">
+            <block class="Magento\Framework\View\Element\Template" name="custom.header" template="Magento_Theme::customheader.phtml" before="header.container"/>
+        </referenceContainer>      
+        <move element="navigation.sections" destination="custom.header" after="-"/>
+        <move element="minicart" destination="custom.header" after="-"/>
+        <move element="top.search" destination="custom.header" after="-"/-->
+    </body>
+</page>
